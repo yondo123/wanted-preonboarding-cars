@@ -2,10 +2,6 @@ export enum apiInfo {
   REUQEST_URL = 'https://preonboarding.platdev.net/api/',
 }
 
-export type IConProps = {
-  size: number;
-};
-
 export type CarBasic = {
   readonly insurance?: CarInsurance;
   readonly additionalProducts?: CarAdditionalProducts;
