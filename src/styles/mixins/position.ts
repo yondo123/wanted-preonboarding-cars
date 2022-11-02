@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-export const posCneterX = (pos = 'start') => {
+export const posCneterX = (pos = 'absolute') => {
   if (pos === 'absolute' || pos === 'absolute') {
     return css`
       position: ${pos};
