@@ -1,8 +1,11 @@
 import IcomoonReact from 'icomoon-react';
 import iconSet from '../assets/fonts/selection.json';
-import { IConProps } from '../types/index';
 
-function BackIcon({ size }: IConProps): React.ReactElement {
+type IconType = {
+  size: number;
+};
+
+function BackIcon({ size }: IconType): React.ReactElement {
   return <IcomoonReact iconSet={iconSet} icon="back" size={size} />;
 }
 
