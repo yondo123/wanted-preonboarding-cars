@@ -2,10 +2,14 @@ export enum apiInfo {
   REUQEST_URL = 'https://preonboarding.platdev.net/api/',
 }
 
+export type IConProps = {
+  size: number;
+};
+
 export type CarBasic = {
-  readonly id: string;
   readonly insurance?: CarInsurance;
   readonly additionalProducts?: CarAdditionalProducts;
+  readonly id: string;
   amount: number;
   startDate: Date;
   createdAt: Date;
@@ -22,10 +26,10 @@ export type CarAdditionalProducts = {
 };
 
 export type CarAttributes = {
-  readonly brand: string;
-  readonly name: string;
   readonly segment: CarSegmentType;
   readonly fuelType: CarFuelType;
+  readonly brand: string;
+  readonly name: string;
   readonly imageUrl: string;
 };
 
