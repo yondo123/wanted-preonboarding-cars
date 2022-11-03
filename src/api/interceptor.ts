@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { apiInfo } from '../types/index';
+import { constatns } from '../types/constants';
 
 const axiosInstance = axios.create({
-  baseURL: apiInfo.REUQEST_URL,
+  baseURL: constatns.REUQEST_URL,
 });
 
 axiosInstance.interceptors.request.use(
