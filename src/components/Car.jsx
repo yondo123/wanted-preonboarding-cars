@@ -1,25 +1,32 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { flexbox } from '../styles/mixins/flexbox';
+import { getCarFuelInfo, getCarSegmentInfo, getCurrency, getDiffDate } from '../utils';
 
-function Car() {
+function Car({ carInfo }) {
+  const { attribute, createdAt, amount } = carInfo;
   return (
     <CarItem>
-      <Noti>신규</Noti>
-      <CarInfo>
-        <CarDetail>
-          <Model>
-            <p>기아</p>
-            <p>EV6</p>
-          </Model>
-          <Amount>
-            <p>중형 / 전기</p>
-            <p>월 600,000 원 부터</p>
-          </Amount>
-        </CarDetail>
-        <CarImage>
-          <img src="https://interview.platdev.net/avantecn7.png" alt="" />
-        </CarImage>
-      </CarInfo>
+      <Link to="/car" state={{ carInfo }}>
+        {getDiffDate(createdAt) <= 1 ? <Noti>신규</Noti> : <></>}
+        <CarInfo>
+          <CarDetail>
+            <Model>
+              <p>{attribute.brand}</p>
+              <p>{attribute.name}</p>
+            </Model>
+            <Amount>
+              <p>
+                {getCarSegmentInfo(attribute.segment).name} / {getCarFuelInfo(attribute.fuelType).name}
+              </p>
+              <p>월 {getCurrency(amount)} 원 부터</p>
+            </Amount>
+          </CarDetail>
+          <CarImage>
+            <img src={attribute.imageUrl} alt="sad" />
+          </CarImage>
+        </CarInfo>
+      </Link>
     </CarItem>
   );
 }
@@ -76,22 +83,3 @@ const CarImage = styled.div`
     height: 100%;
   }
 `;
-
-// <li class="car-item">
-//     <div class="noti">신규</div>
-//     <div class="car-info">
-//         <div class="car-detail">
-//             <div class="car-brand">
-//                 <p>기아</p>
-//                 <p>EV6</p>
-//             </div>
-//             <div class="car-amount">
-//                 <p>중형 / 전기</p>
-//                 <p>월 600,000 원 부터</p>
-//             </div>
-//         </div>
-//         <div class="car-image">
-//             <img src="https://interview.platdev.net/avantecn7.png" alt="">
-//         </div>
-//     </div>
-// </li>

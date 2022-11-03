@@ -1,78 +1,40 @@
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { carCtx } from '../contexts/CarContext';
+import { getCarSegmentInfo, getCarListBySegment } from '../utils';
+import { SEGMENT_LIST } from '../types/constants';
 
 function Category() {
+  const { selectedCategory, setSelectCategory, setCarList, initialCarList } = useContext(carCtx);
+
+  const handleClick = (segment) => () => {
+    setSelectCategory(getCarSegmentInfo(segment));
+    setCarList(() => getCarListBySegment(segment, initialCarList));
+  };
   return (
     <Categories>
-      <li>
-        <button type="button" className="btn-cate-selected">
-          전기
-        </button>
-      </li>
-      <li>
-        <button type="button" className="btn-cate">
-          전기
-        </button>
-      </li>
-      <li>
-        <button type="button" className="btn-cate">
-          전기
-        </button>
-      </li>
-      <li>
-        <button type="button" className="btn-cate">
-          전기
-        </button>
-      </li>
-      <li>
-        <button type="button" className="btn-cate">
-          전기
-        </button>
-      </li>
-      <li>
-        <button type="button" className="btn-cate">
-          전기
-        </button>
-      </li>
-      <li>
-        <button type="button" className="btn-cate">
-          전기
-        </button>
-      </li>
-      <li>
-        <button type="button" className="btn-cate">
-          전기
-        </button>
-      </li>
-      <li>
-        <button type="button" className="btn-cate">
-          전기
-        </button>
-      </li>
-      <li>
-        <button type="button" className="btn-cate">
-          전기
-        </button>
-      </li>
-      <li>
-        <button type="button" className="btn-cate">
-          전기
-        </button>
-      </li>
-      <li>
-        <button type="button" className="btn-cate">
-          전기
-        </button>
-      </li>
+      {SEGMENT_LIST.map((item) => (
+        <li key={item.segment}>
+          <button
+            onClick={handleClick(item.segment)}
+            type="button"
+            disabled={selectedCategory.segment === item.segment}
+            className={selectedCategory.segment === item.segment ? 'btn-cate-selected' : 'btn-cate'}>
+            {item.name}
+          </button>
+        </li>
+      ))}
     </Categories>
   );
 }
 
-export default Category;
+export default React.memo(Category);
 
 const Categories = styled.ul`
   -ms-overflow-style: none;
   scrollbar-width: none;
-  overflow: auto;
+  overflow: scroll;
+  overflow-y: scroll;
   display: flex;
   border-bottom: 1px solid ${({ theme }) => theme.black};
   padding: 0 8px;
